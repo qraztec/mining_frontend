@@ -12,14 +12,14 @@ import RegulatorsList from "./pages/regulatorsList/RegulatorsList"
 
 function App() {
   const companiesList = ["Mining Co", "Eco Mines", "Sustainable Mining Inc.", "Green Earth Mining"]
-  const comments = ["This company is good", "My food has been polluted"]
+  const comments = ["Awesome company! Very good, just the best!", "Just the worst! They ruined everything and my day has never gotten worse."]
   const susScore = 8;
   const opScore = 10
   const sentScore = 6
   //Pass down scores to the Summarizer component using usecontext
   return (
     <div>
-      <RegulatorsList companies={companiesList}/>
+      {/* <RegulatorsList companies={companiesList} areaName="Arizona"/> */}
       {/* <RegulatorHome/> */}
       {/* <MiningForm company={"Mining Co."}/> */}
       {/* <UserComments comments={comments}/> */}

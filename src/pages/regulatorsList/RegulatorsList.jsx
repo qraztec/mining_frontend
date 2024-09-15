@@ -3,11 +3,11 @@ import "./regulatorsList.css"
 import UserComment from "../../components/userComment/UserComment"
 import Topbar from "../../components/topbar/Topbar"
 import Summarizer from "../../components/summarizer/Summarizer"
-export default function UserComments({ companies }) {
+export default function UserComments({ companies, areaName }) {
     return (
         <>
             <Topbar />
-            <h2>List of Companies</h2>
+            <h2>List of Companies in {areaName}</h2>
             <div className="companiesSummary">
                 {
 
