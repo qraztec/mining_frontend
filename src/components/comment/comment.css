@@ -1,0 +1,33 @@
+.commentPage{
+    display: flex;
+    flex-direction: column;
+    width: 100vh;
+}
+.commentText{
+    margin-right: 475px;
+}
+.commentBox{
+    display: flex;
+}
+.commentBoxText{
+    flex: 1
+}
+.commentBoxAI{
+    flex: 1;
+    margin-right: 40px;
+}
+.commentInput{
+    background-color: lightgray;
+    width: 100%;
+}
+.submitBox{
+    margin-top: 20px;
+    text-align: center;
+}
+.commentInput .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: black;  /* Custom focus border color */
+}
+.aiConsultant{
+    cursor: pointer;
+    font-size: 18px;
+}

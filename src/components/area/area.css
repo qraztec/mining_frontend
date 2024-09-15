@@ -1,0 +1,11 @@
+.areaContainer {
+    text-align: center;
+    margin: 20px;
+}
+
+.areaImage {
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+}
+

@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import Login from "./pages/login/Login"
 import './App.css';
+import UserHome from "./pages/userHome/UserHome"
+import UserHome2 from "./pages/userHome2/UserHome2"
+import UserHome3 from "./pages/userHome3/UserHome3"
+import CompanyHome from "./pages/companyHome/CompanyHome"
+import CompanyCurrent from "./pages/companyCurrent/CompanyCurrent"
+import UserComments from "./pages/userComments/UserComments"
+import MiningForm from "./pages/miningform/MiningForm"
+import RegulatorHome from "./pages/regulatorHome/RegulatorHome"
+import RegulatorsList from "./pages/regulatorsList/RegulatorsList"
 
 function App() {
+  const companiesList = ["Mining Co", "Eco Mines", "Sustainable Mining Inc.", "Green Earth Mining"]
+  const comments = ["This company is good", "My food has been polluted"]
+  const susScore = 8;
+  const opScore = 10
+  const sentScore = 6
+  //Pass down scores to the Summarizer component using usecontext
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <RegulatorsList companies={companiesList}/>
+      {/* <RegulatorHome/> */}
+      {/* <MiningForm company={"Mining Co."}/> */}
+      {/* <UserComments comments={comments}/> */}
+      {/* <CompanyHome/> */}
+      {/* <CompanyCurrent areaName="Arizona"/> */}
+      {/* <UserHome/> */}
+      {/* <UserHome2 name= "Arizona" image= "https://www.travelandleisure.com/thmb/UGWR8DL_Dm8zqVaS7m2Kc6XSfqE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TAL-header-mcdowell-mountains-arizona-AZTG0324-f70f2e62c4af4889b8da2d466478d0b3.jpg" /> */}
+      {/* <Login/> */}
+      {/* <UserHome3 companyName="Mining Co"/> */}
     </div>
   );
 }

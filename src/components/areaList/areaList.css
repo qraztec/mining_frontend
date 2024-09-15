@@ -1,0 +1,24 @@
+.areaListContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 20px;
+    
+}
+.areaListContainer.row {
+    display: flex;
+    flex-wrap: nowrap; /* No wrapping when row layout */
+    flex-direction: row;
+    overflow-x: auto; 
+    padding: 10px 0;
+    gap: 50px;
+    width: 100%;
+}
+
+.areaContainer{
+    flex: none; /* Prevent shrinking */
+    width: 300px; /* Give each card a fixed width */
+    height: 200px; /* Fixed height */
+    margin: 10px; 
+}

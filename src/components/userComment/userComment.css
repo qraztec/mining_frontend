@@ -1,0 +1,21 @@
+.commentBox{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.commentBoxText {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.commentBoxAI {
+    flex: 1;
+    margin-right: 40px;
+}
+
+.commentInput {
+    background-color: #f0f0f0; /* Optional: make the background slightly grey to indicate it's read-only */
+    border-radius: 20px;
+}
+

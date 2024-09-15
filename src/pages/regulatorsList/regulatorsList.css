@@ -1,0 +1,8 @@
+.companiesSummary{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.companyName{
+    margin-bottom: -20px;
+}
