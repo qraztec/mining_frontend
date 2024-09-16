@@ -1,9 +1,10 @@
 import "./login.css"
 import {useRef} from "react"
-
+import {useNavigate} from "react-router-dom"
 import * as React from 'react';
 // import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import axios from "axios"
 // import Checkbox from '@mui/material/Checkbox';
 // import CssBaseline from '@mui/material/CssBaseline';
 // import FormControlLabel from '@mui/material/FormControlLabel';
@@ -19,10 +20,48 @@ import Button from '@mui/material/Button';
 export default function Login() {
     const email = useRef();
     const password = useRef();
-    const handleClick = (e) => {
+    const navigate = useNavigate()
+    const handleClick = async(e) => {
         e.preventDefault();
-        console.log(email.current.value)
-        console.log(password.current.value)
+        
+        const loginData = {
+            email: email.current.value,
+            password: password.current.value,
+        };
+        try {
+            
+            const response = await axios.post('http://localhost:6565/login', loginData);
+            console.log('success')
+            // Assuming you get the role in the response data
+            const role = response.data.user.role;
+            
+            // Redirect user based on their role
+            if (role === 'Community Member') {
+                
+                navigate('/user-home'); // Redirect to UserHome component
+            } else if (role === 'Company') {
+                const companyID = response.data.user.company;
+                console.log(companyID)
+                navigate('/company-home', {state: {companyID}}); // Redirect to CompanyHome component
+            } else if (role === 'Regulator') {
+                navigate('/regulator-home'); // Redirect to RegulatorHome component
+            } else {
+                alert('Role not recognized');
+            }
+            
+            // Optionally: Navigate to another page after successful login
+            // window.location.href = '/dashboard'; // or use react-router-dom
+
+        } catch (error) {
+            // Handle error response (e.g., incorrect credentials)
+            if (error.response && error.response.status === 401) {
+                alert('Invalid credentials');
+            } else if (error.response && error.response.status === 404) {
+                alert('User not found');
+            } else {
+                console.error('Error during login:', error);
+            }
+        }
     }
     return (
         <>

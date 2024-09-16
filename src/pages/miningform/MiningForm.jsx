@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import { TextField, MenuItem, Button, Select, InputLabel, FormControl } from "@mui/material";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import "./miningform.css";
+import axios from "axios"
+import {useLocation, useNavigate} from "react-router-dom"
 
-export default function MiningForm({company}) {
-
+export default function MiningForm() {
+    const navigate = useNavigate()
+    const location = useLocation();
+    const { company, area } = location.state;
     const [answers, setAnswers] = useState({
         pollutionControl: "",
         communityEngagement: "",
@@ -21,10 +25,50 @@ export default function MiningForm({company}) {
 
    
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         event.preventDefault();
         // Here you can handle the form submission, e.g., send the data to the backend
-        console.log("Form Submitted: ", { company, answers });
+        const data = {
+            pollutionControl: answers.pollutionControl,
+            communityEngagement: answers.communityEngagement,
+            waterRecycling: answers.waterRecycling,
+        };
+        console.log(data)
+        try {
+            // Send the form answers to the backend
+            const aiResponse = await axios.post('http://localhost:6565/evaluate', data);
+            console.log("sucess ai")
+            console.log(aiResponse)
+            const { pollution_control, food_sovereignty, water_recycling } = aiResponse.data;
+            const operability_score = (pollution_control + food_sovereignty + water_recycling) / 3;
+            const sentiment_score = 0
+            const sustainability_score = (operability_score + sentiment_score) / 2;
+            console.log(operability_score)
+            // Prepare the operation data for storing
+            const operationData = {
+                companyID: company,
+                area,
+                operability_score,
+                sentiment_score, // You can add logic for this
+                sustainability_metrics: {
+                    pollution_control,
+                    food_sovereignty,
+                    water_recycling
+                },
+                sustainability_score
+            };
+            console.log(operationData)
+
+            // Send the final data to the backend for saving to the database
+            await axios.post('http://localhost:6565/operations', operationData);
+
+            alert('Form submitted and evaluated successfully!');
+            navigate('/company-home', { state: { companyID: company } }); // <-- Go back to CompanyHome
+
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
+
     };
 
     return (

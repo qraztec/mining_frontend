@@ -21,26 +21,35 @@ function App() {
   const sentScore = 6
   //Pass down scores to the Summarizer component using usecontext
   return (
-    // <Router>
-    //   <Routes>
-    //     <Route path="/" element={<UserHome/>}/>
-    //     <Route path="/area/:name" element={<UserHome2/>}/>
-    //     <Route path="/area/:name/company/:company" element={<UserHome3/>}/>
-    //   </Routes>
-    // </Router>
-    <div>
-      <Register/>
-      {/* <RegulatorsList companies={companiesList} areaName="Arizona"/> */}
-      {/* <RegulatorHome/> */}
-      {/* <MiningForm company={"Mining Co."}/> */}
-      {/* <UserComments comments={comments}/> */}
-      {/* <CompanyHome/> */}
-      {/* <CompanyCurrent areaName="Arizona"/> */}
-      {/* <UserHome/> */}
-      {/* <UserHome2 name= "Arizona" image= "https://www.travelandleisure.com/thmb/UGWR8DL_Dm8zqVaS7m2Kc6XSfqE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TAL-header-mcdowell-mountains-arizona-AZTG0324-f70f2e62c4af4889b8da2d466478d0b3.jpg" /> */}
-      {/* <Login/> */}
-      {/* <UserHome3 companyName="Mining Co"/> */}
-   </div>
+    <Router>
+      <Routes>
+        {/* Default Route */}
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
+        {/* Role-based Routes */}
+        <Route path="/user-home" element={<UserHome />} />
+        <Route path="/company-home" element={<CompanyHome />} />
+        <Route path="/regulator-home" element={<RegulatorHome />} />
+        <Route path="/mining-form" element={<MiningForm />} />
+        {/* Example: Additional routes for UserHome components */}
+        <Route path="/area/:name" element={<UserHome2 />} />
+        <Route path="/area/:name/company/:company" element={<UserHome3 />} />
+      </Routes>
+    </Router>
+    //<div>
+     // <Register/>
+     // {/* <RegulatorsList companies={companiesList} areaName="Arizona"/> */}
+      //{/* <RegulatorHome/> */}
+     // {/* <MiningForm company={"Mining Co."}/> */}
+     // {/* <UserComments comments={comments}/> */}
+     // {/* <CompanyHome/> */}
+     // {/* <CompanyCurrent areaName="Arizona"/> */}
+     // {/* <UserHome/> */}
+     // {/* <UserHome2 name= "Arizona" image= "https://www.travelandleisure.com/thmb/UGWR8DL_Dm8zqVaS7m2Kc6XSfqE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TAL-header-mcdowell-mountains-arizona-AZTG0324-f70f2e62c4af4889b8da2d466478d0b3.jpg" /> */}
+     // {/* <Login/> */}
+     // {/* <UserHome3 companyName="Mining Co"/> */}
+  // </div>
   );
 }
 
