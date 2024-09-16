@@ -1,13 +1,39 @@
-import React from "react"
-import "./comment.css"
-import TextField from "@mui/material/TextField"
-import Button from "@mui/material/Button"
+import React, { useState } from "react";
+import "./comment.css";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
-export default function Comment() {
+import axios from "axios";
+
+export default function Comment({ area, companyID }) {
+    const [commentText, setCommentText] = useState("");  // State to hold the comment
+
+    // Function to handle the comment submission
+    const handleSubmit = async () => {
+        const feedbackData = {
+            commentText: commentText,
+            area: area,  // Area provided from parent component
+            companyID: companyID  // companyID provided from parent component
+        };
+        console.log(feedbackData)
+        
+        try {
+            // Post the comment to the feedback endpoint
+            const response = await axios.post('http://localhost:6565/feedback', feedbackData);
+            console.log('Feedback submitted successfully', response.data);
+            alert("Comment submitted successfully!");
+
+            // Clear the comment after submission
+            setCommentText("");
+        } catch (error) {
+            console.error('Error submitting feedback:', error);
+            alert("Error submitting feedback, please try again.");
+        }
+    };
+
     return (
         <>
             <div className="commentPage">
-                
                 <div className="commentBox">
                     <div className="commentBoxText">
                         <TextField
@@ -15,6 +41,8 @@ export default function Comment() {
                             rows={6}
                             placeholder="Enter a comment to the Company. Use employee1@company.com to contact an employee directly"
                             className="commentInput"
+                            value={commentText}  // Bind the state to the input field
+                            onChange={(e) => setCommentText(e.target.value)}  // Update state when text changes
                             InputProps={{
                                 sx: {
                                     borderRadius: "10px", // Add a rounded border
@@ -34,15 +62,17 @@ export default function Comment() {
                     </div>
                     <div className="commentBoxAI">
                         <span className="aiConsultant">AI Consultant
-                            <AutoAwesomeIcon sx={{color: "darkblue"}}/>
+                            <AutoAwesomeIcon sx={{ color: "darkblue" }} />
                         </span>
                     </div>
                 </div>
                 
-
+                <div className="submitButtonContainer">
+                    <Button variant="contained" color="primary" onClick={handleSubmit}>
+                        Submit
+                    </Button>
+                </div>
             </div>
-
         </>
-    )
-
+    );
 }
