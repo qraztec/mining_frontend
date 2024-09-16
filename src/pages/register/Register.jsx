@@ -53,7 +53,7 @@ export default function Register() {
                                     <input 
                                         type="radio" 
                                         name="role" 
-                                        value="Coommunity Member" 
+                                        value="Community Member" 
                                         ref={role} 
                                         required 
                                         onChange={showCompanyDropdown} 
