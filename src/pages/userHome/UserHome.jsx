@@ -31,7 +31,7 @@ export default function UserHome() {
             <div className="homePage">
                 <div className="section section1">
                     <div className="miningBox">
-                        Mining Areas:
+                        Mining Areas
                     </div>
                     <SearchBox searchField={searchField} onSearchChange = {onSearchChange} />
                 </div>

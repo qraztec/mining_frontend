@@ -5,6 +5,7 @@
     justify-content: flex-start;  /* Center horizontally */
     align-items: center;  /* Center vertically */
     text-align: center;
+    padding: 20px;
 }
 
 .companyName{
@@ -18,4 +19,11 @@
     
     font-size: 20px;
     font-weight: bold;
+}
+.metricsList{
+    list-style-type: none
+}
+.susSize{
+    font-size: 25px;
+    color: black;
 }

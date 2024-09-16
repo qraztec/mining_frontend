@@ -29,7 +29,7 @@
     font-size: 24px;
 }
 .loginBox {
-    height: 300px;
+    height: 400px;
     padding: 20px;
     background-color: white;
     border-radius: 10px;
@@ -46,26 +46,4 @@
 }
 .loginInput:focus{
     outline: none;
-}
-.loginButton{
-    height: 50px;
-    border-radius: 10px;
-    border: none;
-    background-color: blue;
-    color: white;
-    font-size: 20px;
-    font-weight: 500;
-    cursor: pointer;
-}
-.loginregisterButton {
-    width: 60%;
-    align-self: center;
-    height: 50px;
-    border-radius: 10px;
-    border: none;
-    background-color: blue;
-    color: white;
-    font-size: 20px;
-    font-weight: 500;
-    cursor: pointer;
 }
