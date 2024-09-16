@@ -25,7 +25,7 @@ export default function UserHome2() {
     useEffect(() => {
         const fetchCompanies = async () => {
             try {
-                const response = await axios.get(`http://localhost:6565/operations/${name}`);
+                const response = await axios.get(`http://localhost:6565/operations/area/${name}`);
                 const companiesList = response.data.map((operation) => operation.companyID);
                 setCompanies(companiesList);
             } catch (error) {

@@ -2,16 +2,12 @@ import React from "react";
 import Area from "../area/Area";
 import "./areaList.css";
 
-export default function AreaList({areaList, layout, onAreaClick}) {
+export default function AreaList({ areaList, layout }) {
     return (
         <div className={`areaListContainer ${layout}`}>
-            {
-                areaList.map((area) => (
-                    <div key={area.name} onClick={() => onAreaClick(area.name)}>
-                        <Area name={area.name} image={area.image}/>
-                    </div>
-                ))
-            }
+            {areaList.map((area) => (
+                <Area key={area.name} name={area.name} image={area.image} />
+            ))}
         </div>
-    )
+    );
 }

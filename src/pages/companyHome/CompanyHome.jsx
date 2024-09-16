@@ -11,15 +11,19 @@ export default function CompanyHome() {
     const navigate = useNavigate();
     const { companyID } = location.state; // Access the companyID from login
 
-    // Keep the images for new operations
-    const [areas, setAreas] = useState([
-        { name: "Arizona", image: "https://www.travelandleisure.com/thmb/UGWR8DL_Dm8zqVaS7m2Kc6XSfqE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TAL-header-mcdowell-mountains-arizona-AZTG0324-f70f2e62c4af4889b8da2d466478d0b3.jpg" },
-        { name: "Chile", image: "https://www.andbeyond.com/wp-content/uploads/sites/5/Summer-sunset-in-Torres-del-Paine-Patagonia-Chile.jpg" },
-        { name: "Nevada", image: "https://www.redfin.com/blog/wp-content/uploads/2023/02/Reno-Nevada.jpg" },
-        { name: "Russia", image: "https://ioppublishing.org/wp-content/uploads/2019/06/siberia-CC0.jpg.webp" },
-    ]);
+    // Image map of available areas
+    const imageMap = {
+        "Arizona": "https://www.travelandleisure.com/thmb/UGWR8DL_Dm8zqVaS7m2Kc6XSfqE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TAL-header-mcdowell-mountains-arizona-AZTG0324-f70f2e62c4af4889b8da2d466478d0b3.jpg",
+        "Chile": "https://www.andbeyond.com/wp-content/uploads/sites/5/Summer-sunset-in-Torres-del-Paine-Patagonia-Chile.jpg",
+        "Nevada": "https://www.redfin.com/blog/wp-content/uploads/2023/02/Reno-Nevada.jpg",
+        "Russia": "https://ioppublishing.org/wp-content/uploads/2019/06/siberia-CC0.jpg.webp",
+        "Germany": "https://carrotsandtigers.com/wp-content/uploads/2019/10/rheingau-town-hills-castle.jpg?w=800",
+        "Botswana": "https://media.architecturaldigest.com/photos/60381835bcb000842b894d8b/16:9/w_2560%2Cc_limit/AD0321_SAFARI_3-.jpg",
+        "Congo": "https://borgenproject.org/wp-content/uploads/Congo-2.jpg"
+    };
 
-    const [currentAreas, setCurrentAreas] = useState([]);
+    const [currentAreas, setCurrentAreas] = useState([]); // Areas with current operations
+    const [newAreas, setNewAreas] = useState([]); // Areas without operations
     const [searchField1, setSearch1] = useState('');
     const [searchField2, setSearch2] = useState('');
 
@@ -27,25 +31,23 @@ export default function CompanyHome() {
     useEffect(() => {
         const fetchOperations = async () => {
             try {
-                const response = await axios.get(`http://localhost:6565/operations/${companyID}`);
+                // Fetch all operations for the company
+                console.log(companyID)
+                const response = await axios.get(`http://localhost:6565/operations/company/${companyID}`);
                 const operations = response.data;
+                console.log(operations)
+                const operationAreas = operations.map(op => op.area);
 
-                const imageMap = {
-                    "Arizona": "https://www.travelandleisure.com/thmb/UGWR8DL_Dm8zqVaS7m2Kc6XSfqE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TAL-header-mcdowell-mountains-arizona-AZTG0324-f70f2e62c4af4889b8da2d466478d0b3.jpg",
-                    "Chile": "https://www.andbeyond.com/wp-content/uploads/sites/5/Summer-sunset-in-Torres-del-Paine-Patagonia-Chile.jpg",
-                    "Nevada": "https://www.redfin.com/blog/wp-content/uploads/2023/02/Reno-Nevada.jpg",
-                    "Russia": "https://ioppublishing.org/wp-content/uploads/2019/06/siberia-CC0.jpg.webp",
-                    "Germany": "https://carrotsandtigers.com/wp-content/uploads/2019/10/rheingau-town-hills-castle.jpg?w=800",
-                    "Botswana": "https://media.architecturaldigest.com/photos/60381835bcb000842b894d8b/16:9/w_2560%2Cc_limit/AD0321_SAFARI_3-.jpg",
-                    "Congo": "https://borgenproject.org/wp-content/uploads/Congo-2.jpg"
-                };
+                // Separate current and new operations based on whether they are in operationAreas
+                const current = Object.keys(imageMap).filter(area => operationAreas.includes(area));
+                const newOp = Object.keys(imageMap).filter(area => !operationAreas.includes(area));
 
-                const areaData = operations.map(op => ({
-                    name: op.area,
-                    image: imageMap[op.area] || "https://via.placeholder.com/150",
-                }));
+                // Prepare the areas with their corresponding images
+                const currentAreaData = current.map(area => ({ name: area, image: imageMap[area] }));
+                const newAreaData = newOp.map(area => ({ name: area, image: imageMap[area] }));
 
-                setCurrentAreas(areaData);
+                setCurrentAreas(currentAreaData);
+                setNewAreas(newAreaData);
             } catch (error) {
                 console.error('Error fetching operations:', error);
             }
@@ -66,18 +68,21 @@ export default function CompanyHome() {
         setSearch2(event.target.value);
     };
 
-    const filterAreas1 = areas.filter(areas => {
-        return areas.name.toLowerCase().includes(searchField1.toLowerCase());
+    // Filter new areas (for new operations) based on search
+    const filterNewAreas = newAreas.filter(area => {
+        return area.name.toLowerCase().includes(searchField1.toLowerCase());
     });
 
-    const filterAreas2 = currentAreas.filter(currentAreas => {
-        return currentAreas.name.toLowerCase().includes(searchField2.toLowerCase());
+    // Filter current areas (for current operations) based on search
+    const filterCurrentAreas = currentAreas.filter(area => {
+        return area.name.toLowerCase().includes(searchField2.toLowerCase());
     });
 
     return (
         <>
             <Topbar />
             <div className="homePage">
+                {/* New Operations Section */}
                 <div className="section1_2">
                     <div className="section section1">
                         <div className="operationBox">
@@ -87,10 +92,12 @@ export default function CompanyHome() {
                     </div>
                     <div className="section section2">
                         <div className="pictureBox">
-                            <AreaList areaList={filterAreas1} layout="row" onAreaClick={handleCardClick} />
+                            <AreaList areaList={filterNewAreas} layout="row" onAreaClick={handleCardClick} />
                         </div>
                     </div>
                 </div>
+
+                {/* Current Operations Section */}
                 <div className="section1_2">
                     <div className="section section1">
                         <div className="operationBox">
@@ -100,11 +107,12 @@ export default function CompanyHome() {
                     </div>
                     <div className="section section2">
                         <div className="pictureBox">
-                            <AreaList areaList={filterAreas2} layout="row" />
+                            <AreaList areaList={filterCurrentAreas} layout="row" />
                         </div>
                     </div>
                 </div>
             </div>
         </>
-    )
+    );
 }
+
