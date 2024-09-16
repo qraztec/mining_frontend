@@ -19,7 +19,7 @@ export default function Comment({ area, companyID }) {
         
         try {
             // Post the comment to the feedback endpoint
-            const response = await axios.post('http://localhost:6565/feedback', feedbackData);
+            const response = await axios.post('https://mining-api-j318.onrender.com/feedback', feedbackData);
             console.log('Feedback submitted successfully', response.data);
             alert("Comment submitted successfully!");
 

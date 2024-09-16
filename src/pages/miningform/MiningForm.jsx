@@ -36,7 +36,7 @@ export default function MiningForm() {
         console.log(data)
         try {
             // Send the form answers to the backend
-            const aiResponse = await axios.post('http://localhost:6565/evaluate', data);
+            const aiResponse = await axios.post('https://mining-api-j318.onrender.com/evaluate', data);
             console.log("sucess ai")
             console.log(aiResponse)
             const { pollution_control, food_sovereignty, water_recycling } = aiResponse.data;
@@ -60,7 +60,7 @@ export default function MiningForm() {
             console.log(operationData)
 
             // Send the final data to the backend for saving to the database
-            await axios.post('http://localhost:6565/operations', operationData);
+            await axios.post('https://mining-api-j318.onrender.com/operations', operationData);
 
             alert('Form submitted and evaluated successfully!');
             navigate('/company-home', { state: { companyID: company } }); // <-- Go back to CompanyHome

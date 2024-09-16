@@ -30,7 +30,7 @@ export default function Login() {
         };
         try {
             
-            const response = await axios.post('http://localhost:6565/login', loginData);
+            const response = await axios.post('https://mining-api-j318.onrender.com/login', loginData);
             console.log('success')
             // Assuming you get the role in the response data
             const role = response.data.user.role;

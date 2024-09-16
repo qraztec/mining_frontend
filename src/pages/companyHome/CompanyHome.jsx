@@ -33,7 +33,7 @@ export default function CompanyHome() {
             try {
                 // Fetch all operations for the company
                 console.log(companyID)
-                const response = await axios.get(`http://localhost:6565/operations/company/${companyID}`);
+                const response = await axios.get(`https://mining-api-j318.onrender.com/operations/company/${companyID}`);
                 const operations = response.data;
                 console.log(operations)
                 const operationAreas = operations.map(op => op.area);
