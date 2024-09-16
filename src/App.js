@@ -35,6 +35,7 @@ function App() {
         {/* Example: Additional routes for UserHome components */}
         <Route path="/area/:name" element={<UserHome2 />} />
         <Route path="/area/:name/company/:company" element={<UserHome3 />} />
+        <Route path="/company-current" element={<CompanyCurrent />} />
       </Routes>
     </Router>
     //<div>
