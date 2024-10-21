@@ -1,8 +1,10 @@
 # MineSync - An AI - Driven Sustainibility Platform for the Mining Industry
 
 ## Implementation:
-Fully implemented to AWS. Deployed Frontend on Amplify.
+Fully implemented on AWS. Deployed Frontend on Amplify.
+
 Configured Backend using API Gateway and AWS Lambda.
+
 Data stored in DynamoDB.
 
 ## Link to website:
