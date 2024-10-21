@@ -30,11 +30,12 @@ export default function CompanyHome() {
         const fetchOperations = async () => {
             try {
                 console.log(companyID);
-                const response = await axios.get(`https://mining-api-j318.onrender.com/operations/company/${companyID}`);
+                const response = await axios.get(`https://nppk1se46l.execute-api.us-west-2.amazonaws.com/operations/company/${companyID}`);
                 const operations = response.data;
+                
                 console.log(operations);
                 const operationAreas = operations.map(op => op.area);
-
+                console.log(operationAreas);
                 const current = Object.keys(imageMap).filter(area => operationAreas.includes(area));
                 const newOp = Object.keys(imageMap).filter(area => !operationAreas.includes(area));
 

@@ -25,12 +25,12 @@ export default function Login() {
         e.preventDefault();
         
         const loginData = {
-            email: email.current.value,
-            password: password.current.value,
+            loginEmail: email.current.value,
+            loginPassword: password.current.value,
         };
         try {
             
-            const response = await axios.post('https://mining-api-j318.onrender.com/login', loginData);
+            const response = await axios.post('https://nppk1se46l.execute-api.us-west-2.amazonaws.com/login', loginData);
             console.log('success')
             // Assuming you get the role in the response data
             const role = response.data.user.role;
@@ -40,7 +40,7 @@ export default function Login() {
                 
                 navigate('/user-home'); // Redirect to UserHome component
             } else if (role === 'Company') {
-                const companyID = response.data.user.company;
+                const companyID = response.data.user.profileID;
                 console.log(companyID)
                 navigate('/company-home', {state: {companyID}}); // Redirect to CompanyHome component
             } else if (role === 'Regulator') {

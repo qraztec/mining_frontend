@@ -18,7 +18,7 @@ export default function UserHome3() {
     useEffect(() => {
         const fetchOperationData = async () => {
             try {
-                const response = await axios.get(`https://mining-api-j318.onrender.com/operations/ca/${company}/${name}`);
+                const response = await axios.get(`https://nppk1se46l.execute-api.us-west-2.amazonaws.com/operations/ca/${company}/${name}`);
                 setOperationData(response.data);  // Store the response data in state
                 setLoading(false);
             } catch (err) {

@@ -25,7 +25,7 @@ export default function UserHome2() {
     useEffect(() => {
         const fetchCompanies = async () => {
             try {
-                const response = await axios.get(`https://mining-api-j318.onrender.com/operations/area/${name}`);
+                const response = await axios.get(`https://nppk1se46l.execute-api.us-west-2.amazonaws.com/operations/area/${name}`);
                 const companiesList = response.data.map((operation) => operation.companyID);
                 setCompanies(companiesList);
             } catch (error) {
